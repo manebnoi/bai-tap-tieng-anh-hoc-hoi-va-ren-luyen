@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài Tập Tiếng Anh</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <audio id="bg-music" src="music.mp3" preload="auto"></audio>
+
+  <header>
+    <h1>🏆 English Practice Game</h1>
+    <p class="subtitle">Train your vocabulary, grammar, and win the Knowledge Cup!</p>
+  </header>
+
+  <main id="game">
+    <div id="question"></div>
+    <div id="answers"></div>
+
+    <button id="nextBtn" class="btn hidden">Next</button>
+  </main>
+
+  <footer>
+    <p>Score: <span id="score">0</span></p>
+    <button id="startBtn" class="btn">Start Game</button>
+  </footer>
+
+  <div id="reward" class="popup hidden">
+    <h2>🏆 Knowledge Cup Unlocked!</h2>
+    <img src="cup.png" class="cup" />
+    <button onclick="closeReward()" class="btn">Continue</button>
+  </div>
+</body>
+</html>
