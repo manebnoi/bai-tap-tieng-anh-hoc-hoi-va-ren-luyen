@@ -1,22 +1,118 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 body {
-    background: #0c4a6e;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
+  background: linear-gradient(120deg, #0a6cff, #68a4ff);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.question-box {
-    font-size: 24px;
-    margin: 20px auto;
+/* HEADER */
+header {
+  text-align: center;
+  padding: 20px 10px;
 }
 
-.option-btn {
-    display: block;
-    padding: 12px;
-    margin: 10px auto;
-    font-size: 18px;
-    width: 70%;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
+.subtitle {
+  font-size: 18px;
+  opacity: 0.9;
 }
+
+/* MAIN GAME AREA */
+#game {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+}
+
+#question {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+#answers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 12px 18px;
+  background: #ffffff;
+  color: #0056d6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.25s;
+}
+
+.btn:hover {
+  background: #d9e9ff;
+  transform: translateY(-2px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 20px;
+}
+
+#score {
+  font-weight: bold;
+}
+
+/* REWARD POPUP */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: #004aad;
+  padding: 30px;
+  width: 300px;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.popup img.cup {
+  width: 120px;
+  margin: 15px 0;
+}
+
+.popup .btn {
+  width: 100%;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  #question {
+    font-size: 20px;
+  }
+  .btn {
+    font-size: 16px;
+  }
+}
+
