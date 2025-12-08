@@ -459,5 +459,6 @@ const QUESTIONS = [
   {question:"Which one is fast?", options:["cheetah","snail","turtle"], correct:0},
   {question:"Which one is used for studying?", options:["book","fork","glass"], correct:0},
   {question:"Which one is a fruit?", options:["plum","soap","paper"], correct:0},
-  {question:"Which one is a drink?", options:["tea","stone","sho]();
+  {question:"Which one is a drink?", options:["tea","stone","shoes"]()
+       ];
     
