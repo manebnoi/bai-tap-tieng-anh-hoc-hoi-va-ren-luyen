@@ -1,138 +1,91 @@
-let questionList = [];
 let currentIndex = 0;
 let score = 0;
-let bgMusic = null;
+let shuffledQuestions = [];
 
-// DOM elements
 const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
-const startBtn = document.getElementById("startBtn");
+const optionsEl = document.getElementById("options");
 const nextBtn = document.getElementById("nextBtn");
-const scoreEl = document.getElementById("score");
-const rewardPopup = document.getElementById("reward");
+const progressEl = document.getElementById("progress");
 
-// Background music
-bgMusic = document.getElementById("bg-music");
+// Start game
+startQuiz();
 
-startBtn.addEventListener("click", startGame);
-nextBtn.addEventListener("click", nextQuestion);
-
-// -----------------------
-// START GAME
-// -----------------------
-function startGame() {
-  // Play music ON CLICK only
-  bgMusic.currentTime = 0;
-  bgMusic.play();
-
-  score = 0;
-  scoreEl.textContent = score;
-
-  // Use 20 random questions from data.js
-  questionList = window.getRandomQuizSet(20);
-
-  currentIndex = 0;
-  startBtn.classList.add("hidden");
-  nextBtn.classList.add("hidden");
-
-  showQuestion();
-}
-
-// -----------------------
-// SHOW QUESTION
-// -----------------------
-function showQuestion() {
-  const q = questionList[currentIndex];
-
-  // Clear old answers
-  answersEl.innerHTML = "";
-  nextBtn.classList.add("hidden");
-
-  // Display question text
-  questionEl.textContent = q.q;
-
-  // Special case: listening
-  if (q.type === "listening" && q.audio) {
-    let audioElement = document.createElement("audio");
-    audioElement.src = q.audio;
-    audioElement.controls = true;
-    audioElement.style.marginBottom = "15px";
-    answersEl.appendChild(audioElement);
-  }
-
-  // Create answer buttons
-  q.options.forEach(option => {
-    const btn = document.createElement("button");
-    btn.classList.add("btn");
-    btn.textContent = option;
-
-    btn.addEventListener("click", () => handleAnswer(option, q.answer, btn));
-
-    answersEl.appendChild(btn);
-  });
-}
-
-// -----------------------
-// HANDLE ANSWER
-// -----------------------
-function handleAnswer(selected, correct, btn) {
-  const allButtons = answersEl.querySelectorAll("button");
-
-  allButtons.forEach(b => (b.disabled = true));
-
-  if (selected === correct) {
-    btn.style.background = "#00ff99";
-    btn.style.color = "#004400";
-    score++;
-    scoreEl.textContent = score;
-  } else {
-    btn.style.background = "#ff4d4d";
-    btn.style.color = "white";
-
-    // highlight correct answer
-    allButtons.forEach(b => {
-      if (b.textContent === correct) {
-        b.style.background = "#00ff99";
-        b.style.color = "#004400";
-      }
-    });
-  }
-
-  nextBtn.classList.remove("hidden");
-}
-
-// -----------------------
-// NEXT QUESTION
-// -----------------------
-function nextQuestion() {
-  currentIndex++;
-
-  if (currentIndex >= questionList.length) {
-    endGame();
-  } else {
+function startQuiz() {
+    shuffledQuestions = shuffleArray(QUESTIONS);
+    currentIndex = 0;
+    score = 0;
     showQuestion();
-  }
 }
 
-// -----------------------
-// END GAME
-// -----------------------
-function endGame() {
-  questionEl.textContent = "🎉 Hoàn thành bài chơi!";
-  answersEl.innerHTML = "";
-  nextBtn.classList.add("hidden");
+function showQuestion() {
+    const q = shuffledQuestions[currentIndex];
 
-  // Show reward if good score
-  if (score >= 15) {
-    rewardPopup.classList.remove("hidden");
-  }
+    questionEl.innerText = q.question;
+    progressEl.innerText = `Question ${currentIndex + 1} / ${shuffledQuestions.length}`;
 
-  startBtn.classList.remove("hidden");
+    optionsEl.innerHTML = "";
+    nextBtn.style.display = "none";
+
+    const shuffledOptions = q.options
+        .map((opt, idx) => ({ text: opt, index: idx }))
+        .sort(() => Math.random() - 0.5);
+
+    shuffledOptions.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerText = opt.text;
+        btn.onclick = () => selectAnswer(opt.index);
+        optionsEl.appendChild(btn);
+    });
 }
 
-// -----------------------
-// CLOSE REWARD POPUP
-// -----------------------
-window.closeReward = function () {
-  rewardPopup.classList.add("hidden");
+function selectAnswer(choice) {
+    const q = shuffledQuestions[currentIndex];
+    const buttons = document.querySelectorAll(".option-btn");
+
+    buttons.forEach((b) => (b.disabled = true));
+
+    if (choice === q.correct) {
+        score++;
+        highlightCorrect(buttons, q.options[q.correct]);
+    } else {
+        highlightCorrect(buttons, q.options[q.correct]);
+        highlightWrong(buttons, q.options[choice]);
+    }
+
+    nextBtn.style.display = "block";
+}
+
+function highlightCorrect(btns, correctText) {
+    btns.forEach((b) => {
+        if (b.innerText === correctText) b.classList.add("correct");
+    });
+}
+
+function highlightWrong(btns, wrongText) {
+    btns.forEach((b) => {
+        if (b.innerText === wrongText) b.classList.add("wrong");
+    });
+}
+
+nextBtn.onclick = () => {
+    currentIndex++;
+    if (currentIndex < shuffledQuestions.length) {
+        showQuestion();
+    } else {
+        finishQuiz();
+    }
 };
+
+function finishQuiz() {
+    questionEl.innerHTML = `🎉 Completed!`;
+    optionsEl.innerHTML = `
+        <img src="cup.png" class="trophy">
+        <div class="result">Score: ${score}/${shuffledQuestions.length}</div>
+    `;
+    nextBtn.style.display = "none";
+}
+
+function shuffleArray(arr) {
+    return arr.sort(() => Math.random() - 0.5);
+}
