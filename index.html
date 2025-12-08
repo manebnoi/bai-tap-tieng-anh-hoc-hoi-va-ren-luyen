@@ -4,11 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bài Tập Tiếng Anh</title>
+
+  <!-- Load styles -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Load question data FIRST -->
+  <script src="data.js"></script>
+
+  <!-- Game script -->
   <script src="script.js" defer></script>
 </head>
 
 <body>
+  <!-- background music - plays only after Start -->
   <audio id="bg-music" src="music.mp3" preload="auto"></audio>
 
   <header>
@@ -28,6 +36,7 @@
     <button id="startBtn" class="btn">Start Game</button>
   </footer>
 
+  <!-- Reward popup -->
   <div id="reward" class="popup hidden">
     <h2>🏆 Knowledge Cup Unlocked!</h2>
     <img src="cup.png" class="cup" />
