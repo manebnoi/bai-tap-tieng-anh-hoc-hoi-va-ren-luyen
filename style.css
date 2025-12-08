@@ -1,0 +1,22 @@
+body {
+    background: #0c4a6e;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.question-box {
+    font-size: 24px;
+    margin: 20px auto;
+}
+
+.option-btn {
+    display: block;
+    padding: 12px;
+    margin: 10px auto;
+    font-size: 18px;
+    width: 70%;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+}
