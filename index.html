@@ -5,22 +5,24 @@
     <title>English Quiz Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<header>
     <h1>English Quiz Game</h1>
+    <p class="subtitle">Practice your English skills</p>
+</header>
 
-    <div id="question" class="question-box">Loading question...</div>
-
-    <div id="options" class="options"></div>
-
-    <!-- Load data BEFORE script -->
-    <script src="data.js"></script>
-    <script src="script.js"></script>
 <main id="quiz-box">
-  <div id="progress"></div>
-  <div id="question"></div>
-  <div id="options"></div>
-  <button id="nextBtn" class="hidden">Next</button>
+    <div id="progress"></div>
+    <div id="question"></div>
+    <div id="options"></div>
+    <button id="nextBtn">Next</button>
 </main>
+
+<!-- Load data BEFORE script -->
+<script src="data.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
