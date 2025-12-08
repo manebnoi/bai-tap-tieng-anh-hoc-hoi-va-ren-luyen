@@ -1,118 +1,138 @@
-/* RESET */
+/* ===== RESET ===== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
-  background: linear-gradient(120deg, #0a6cff, #68a4ff);
-  color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
+    background-size: 400% 400%;
+    animation: bg 12s ease infinite;
+    min-height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* HEADER */
+@keyframes bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== HEADER ===== */
 header {
-  text-align: center;
-  padding: 20px 10px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+header h1 {
+    font-size: 38px;
+    font-weight: 700;
+    text-shadow: 0 0 10px #000, 0 0 25px #004;
 }
 
 .subtitle {
-  font-size: 18px;
-  opacity: 0.9;
+    font-size: 18px;
+    opacity: 0.9;
 }
 
-/* MAIN GAME AREA */
-#game {
-  width: 90%;
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-  padding: 20px;
+/* ===== QUIZ CONTAINER ===== */
+#quiz-box {
+    width: 90%;
+    max-width: 700px;
+    background: white;
+    color: #222;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: drop 0.7s ease;
+}
+
+@keyframes drop {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 #question {
-  font-size: 24px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  line-height: 1.4;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-#answers {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 25px;
-}
-
-/* BUTTONS */
-.btn {
-  padding: 12px 18px;
-  background: #ffffff;
-  color: #0056d6;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  transition: 0.25s;
-}
-
-.btn:hover {
-  background: #d9e9ff;
-  transform: translateY(-2px);
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px 0;
-  font-size: 20px;
-}
-
-#score {
-  font-weight: bold;
-}
-
-/* REWARD POPUP */
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  color: #004aad;
-  padding: 30px;
-  width: 300px;
-  text-align: center;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-}
-
-.popup img.cup {
-  width: 120px;
-  margin: 15px 0;
-}
-
-.popup .btn {
-  width: 100%;
-}
-
-/* MOBILE */
-@media (max-width: 480px) {
-  #question {
-    font-size: 20px;
-  }
-  .btn {
+#progress {
     font-size: 16px;
-  }
+    margin-bottom: 20px;
+    color: #0d47a1;
+    font-weight: 600;
 }
 
+/* ===== OPTIONS ===== */
+#options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #e3f2fd;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.25s;
+    font-weight: 600;
+}
+
+.option-btn:hover {
+    background: #bbdefb;
+    transform: scale(1.02);
+}
+
+/* Correct / Wrong Effects */
+.correct {
+    background: #4caf50 !important;
+    color: white;
+}
+
+.wrong {
+    background: #e53935 !important;
+    color: white;
+}
+
+/* ===== NEXT BUTTON ===== */
+#nextBtn {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 18px;
+    background: #1976d2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#nextBtn:hover {
+    background: #0d47a1;
+}
+
+/* ===== RESULT ===== */
+.result {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    color: #0d47a1;
+}
+
+/* Trophy image */
+.trophy {
+    width: 120px;
+    display: block;
+    margin: 20px auto;
+}
